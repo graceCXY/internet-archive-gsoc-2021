@@ -1,13 +1,13 @@
 <?php
 
-echo "hello world";
+// echo "hello world";
 // require("blah.php");
 
 require 'vendor/autoload.php';
 
-$cite_1 = new Citation();
-$cite_1->set_author("Me");
-echo $cite_1->get_author();
+// $cite_1 = new Citation();
+// $cite_1->set_author("Me");
+// echo $cite_1->get_author();
 
 // ini_set( 'memory_limit', '256M' );
 // header( 'Content-Type: application/json' );
@@ -23,9 +23,49 @@ echo $cite_1->get_author();
 
 use Wikimedia\DeadlinkChecker\CheckIfDead;
 
-$deadLinkChecker = new CheckIfDead();
-$url = 'https://en.wikipedia.org';
-$exec = $deadLinkChecker->isLinkDead( $url );
-echo var_export( $exec );
+$listFile = 'Journal_3_field_year.txt';
+$goodFile = fopen("Journal_3_field_year_good.txt", "w");
+$badFile = fopen("Journal_3_field_year_bad.txt", "w");
+
+
+$list = trim (file_get_contents( $listFile ) );
+
+$list = explode( "\n", $list );
+
+$list = array_map( 'trim', $list );
+
+$lists = array_chunk( $list, 100 );
+
+$totalCount = 0;
+$goodLinkCount = 0;
+$badLinkCount = 0;
+
+
+foreach( $lists as $list ) {
+    $deadLinkChecker = new CheckIfDead(30,60,false,false,false);
+    $exec = $deadLinkChecker->areLinksDead( $list );
+    $errors = $deadLinkChecker->getErrors();
+    
+    foreach( $exec as $url=>$result ) {
+        // echo "$url - ";
+        if( $result ) {
+            // echo $errors[$url];
+            fwrite($badFile, $url);
+            fwrite($badFile, "\n");
+            $badLinkCount = $badLinkCount + 1;
+        } else {
+            // echo "GOOD";
+            fwrite($goodFile, $url);
+            fwrite($goodFile, "\n");
+            $goodLinkCount = $goodLinkCount + 1;
+        }
+        // echo "\n";
+        $totalCount = $totalCount + 1;
+    }
+}
+
+echo "Total links: " + $totalCount + "\n";
+echo "Good Links: " + $goodLinkCount + "\n";
+echo "Bad Links:" + $badLinkCount + "\n";
 
 ?>
