@@ -23,9 +23,9 @@ require 'vendor/autoload.php';
 
 use Wikimedia\DeadlinkChecker\CheckIfDead;
 
-$listFile = 'Journal_3_field_year.txt';
-$goodFile = fopen("Journal_3_field_year_good.txt", "w");
-$badFile = fopen("Journal_3_field_year_bad.txt", "w");
+$listFile = 'Journal_date_index_turk.txt';
+$goodFile = fopen("Journal_date_index_turk_good.txt", "w");
+$badFile = fopen("Journal_date_index_turk_bad.txt", "w");
 
 
 $list = trim (file_get_contents( $listFile ) );
@@ -64,8 +64,8 @@ foreach( $lists as $list ) {
     }
 }
 
-echo "Total links: " + $totalCount + "\n";
-echo "Good Links: " + $goodLinkCount + "\n";
-echo "Bad Links:" + $badLinkCount + "\n";
+echo "Total links: {$totalCount} \n";
+echo "Good Links: {$goodLinkCount} \n";
+echo "Bad Links: {$badLinkCount} \n";
 
 ?>
