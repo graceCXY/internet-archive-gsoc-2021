@@ -1,5 +1,5 @@
 import strutils
-import nre
+import regex
 import uri
 import httpclient
 import json
@@ -49,7 +49,7 @@ proc find_html_lst_from_json(response_text:string, verbose = false): seq[string]
 
     if verbose: echo html_str
     
-    var html_tags = findAll(html_str, re"<[^>]*>")
+    var html_tags = findAndCaptureAll(html_str, re"<[^>]*>")
     
     if verbose: echo html_tags
     
@@ -93,7 +93,7 @@ proc find_urls(html_lst:seq[string], verbose = false): seq[string] =
                     
                     var url_regex = re"\/\/[a-zA-Z0-9]+\.[^\s]{2,}"
         
-                    if find(field_content, url_regex).isNone == false:
+                    if contains(field_content, url_regex):
                 
                         if verbose: 
                             echo "match"
