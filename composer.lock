@@ -1,0 +1,94 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "3f7debfa6d86cdb76a81002c2314a4b7",
+    "packages": [
+        {
+            "name": "wikimedia/deadlinkchecker",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wikimedia/DeadlinkChecker.git",
+                "reference": "268c580bbb13e383149f980e5b90926c16c89821"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wikimedia/DeadlinkChecker/zipball/268c580bbb13e383149f980e5b90926c16c89821",
+                "reference": "268c580bbb13e383149f980e5b90926c16c89821",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-intl": "*",
+                "lib-curl": ">=7.15.1",
+                "php": ">=7.0.0"
+            },
+            "replace": {
+                "niharika29/deadlinkchecker": "*"
+            },
+            "require-dev": {
+                "jakub-onderka/php-parallel-lint": "~0.8",
+                "mediawiki/mediawiki-codesniffer": "0.7.2",
+                "phpunit/phpunit": "~4.8|~5.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Wikimedia\\DeadlinkChecker\\": "src/"
+                }
+            },
+            "scripts": {
+                "fix": [
+                    "phpcbf"
+                ],
+                "test": [
+                    "composer validate --no-interaction",
+                    "parallel-lint . --exclude vendor",
+                    "phpunit",
+                    "phpcs -p"
+                ]
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Niharika Kohli",
+                    "email": "niharikakohli29@gmail.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Maximilian Doerr",
+                    "email": "maximilian.doerr@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Library for checking if a given link is dead or alive",
+            "homepage": "https://www.mediawiki.org/wiki/DeadlinkChecker",
+            "keywords": [
+                "deadlink",
+                "link"
+            ],
+            "support": {
+                "source": "https://github.com/wikimedia/DeadlinkChecker/tree/master",
+                "issues": "https://github.com/wikimedia/DeadlinkChecker/issues"
+            },
+            "time": "2020-12-22T16:22:57+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "wikimedia/deadlinkchecker": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.1.0"
+}
